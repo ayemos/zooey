@@ -1,9 +1,9 @@
 [
   "hubot-diagnostics",
   "hubot-help",
-  "hubot-heroku-keepalive",
   "hubot-google-images",
   "hubot-google-translate",
+  "hubot-heroku-keepalive",
   "hubot-pugme",
   "hubot-maps",
   "hubot-redis-brain",

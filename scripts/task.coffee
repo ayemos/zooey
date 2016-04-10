@@ -1,6 +1,4 @@
-# 雑多なもの
-Conversation = require('hubot-conversation')
-
+# タスク管理系
 module.exports = (robot) ->
 
   #
