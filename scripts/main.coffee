@@ -1,17 +1,17 @@
-# Description:
-#   Example scripts for you to examine and try out.
-#
-# Notes:
-#   They are commented out by default, because most of them are pretty silly and
-#   wouldn't be useful and amusing enough for day to day huboting.
-#   Uncomment the ones you want to try and experiment with.
-#
-#   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
+  robot.hear /test/i, (res) ->
+    res.send "#{res.message.user.id}"
 
-  # robot.hear /badger/i, (res) ->
-  #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
+  robot.respond /(hi|hello|yo|hey)/i, (res) ->
+    user = robot.brain.get(res.message.user.id)
+
+
+  robot.respond /call me (.*)\.?/i, (res) ->
+    res.send ""
+
+  robot.hear /(疲れた[^？?])/i, (res) ->
+    res.send "頑張って！"
   #
   # robot.respond /open the (.*) doors/i, (res) ->
   #   doorType = res.match[1]

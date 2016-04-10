@@ -5,6 +5,7 @@
   "author": "ayemos <ayemos.y@gmail.com>",
   "description": "Zooey Deschanel became a bot",
   "dependencies": {
+    "cron": "^1.0.5",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.6",
