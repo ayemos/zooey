@@ -20,14 +20,13 @@ module.exports = (robot) ->
       res.send url
 
   robot.showGif = (res) ->
-    imageMe res, 'zooey deschanel', true, (url) ->
+    imageMe res, 'zooey', true, (url) ->
       res.send url
 
   robot.respond /(hi|hello|yo|hey)/i, (res) ->
     userName = robot.brain.get("userName-#{res.message.user.id}")
     if userName
       res.send "Hello, #{userName}!!"
-      robot.showGif(res)
     else
       dialog = conversation.startDialog(res)
       res.reply "Hello, but who are you?"
@@ -42,7 +41,12 @@ module.exports = (robot) ->
 
   cheers = ['頑張って…', '頑張って！！', 'ファイト！', '']
   robot.hear /疲れた([^？\?]|\b|$)/i, (res) ->
-    res.send "頑張って！"
+    res.send res.random cheers
+    # gif より picを多めに
+    if (Math.random() * 100) > 60
+      robot.showGif(res)
+    else
+      robot.showGif(res)
 
   #
   # robot.respond /open the (.*) doors/i, (res) ->
