@@ -23,7 +23,7 @@ sunday = (robot) ->
   return
 
 module.exports = (robot) ->
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "* * * * * *"
     start:    true
     timeZone: "Asia/Tokyo"
@@ -33,7 +33,7 @@ module.exports = (robot) ->
       sunday(robot)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 8 * * 1 *"
     start:    true
     timeZone: "Asia/Tokyo"
@@ -42,7 +42,7 @@ module.exports = (robot) ->
       monday(robot)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 0 8 * 2 *"
     start:    true
     timeZone: "Asia/Tokyo"
@@ -51,7 +51,7 @@ module.exports = (robot) ->
       tuesday(robot)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 0 8 * 3 *"
     start:    true
     timeZone: "Asia/Tokyo"
@@ -60,7 +60,7 @@ module.exports = (robot) ->
       wednesday(robot)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 0 8 * 4 *"
     start:    true
     timeZone: "Asia/Tokyo"
