@@ -1,36 +1,35 @@
 cronJob = require('cron').CronJob
 
-monday = (robot) ->
-  robot.send
-  return
-
-tuesday = (robot) ->
-  return
-
-wednesday = (robot) ->
-  return
-
-thursday = (robot) ->
-  return
-
-friday = (robot) ->
-  return
-
-saturday = (robot) ->
-  return
-
-sunday = (robot) ->
-  return
+dayGomiMap =
+  "monday": ["燃やすごみ"]
+  "tuesday": []
+  "second_tuesday": ["燃やさないゴミ(水銀を*含まない*もの)"]
+  "fourth_tuesday": ["燃やさないゴミ(水銀を含む製品も可)"]
+  "wednesday": []
+  "thursday": ["燃やすごみ"]
+  "friday": ["古紙・ダンボールごみ"]
+  "saturday": ["資源ごみ"]
+  "sunday": ["hoge"]
 
 module.exports = (robot) ->
+  robot.sayGomi = (gomiType) ->
+    robot.send {room: "#general"}, """
+!!!!試験運用中(結果を信用しないように)!!!!"
+----ゴミ出しのお知らせ----
+"""
+    robot.send {room: "#general"}, """
+今日は『#{gomiType}』の日ね。
+"*8*時までに出すのよ？急いで急いで！
+"""
+
   new cronJob(
-    cronTime: "* * * * * *"
+    #cronTime: "0 8 * * 0 *"
+    cronTime: "* * * * * 0"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      robot.send "おはようございます！"
-      sunday(robot)
+      if dayGomiMap.sunday? && dayGomiMap.sunday.length > 0
+        robot.sayGomi(dayGomiMap.sunday)
   )
 
   new cronJob(
@@ -38,8 +37,8 @@ module.exports = (robot) ->
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      monday(robot)
+      if dayGomiMap.monday? && dayGomiMap.monday.length > 0
+        robot.sayGomi(dayGomiMap.monday)
   )
 
   new cronJob(
@@ -47,8 +46,16 @@ module.exports = (robot) ->
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      tuesday(robot)
+      if dayGomiMap.tuesday? && dayGomiMap.tuesday.length > 0
+        date = new Date
+        day = date.getDate()
+
+        # second
+        if day >= 8 && day <= 14
+          robot.sayGomi(dayGomiMap.second_tuesday)
+        # fourth
+        else if day >= 22 && day <= 28
+          robot.sayGomi(dayGomiMap.fourth_tuesday)
   )
 
   new cronJob(
@@ -56,8 +63,8 @@ module.exports = (robot) ->
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      wednesday(robot)
+      if dayGomiMap.wednesday? && dayGomiMap.wednesday.length > 0
+        robot.sayGomi(dayGomiMap.wednesday)
   )
 
   new cronJob(
@@ -65,24 +72,24 @@ module.exports = (robot) ->
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      thursday(robot)
+      if dayGomiMap.thursday? && dayGomiMap.thursday.length > 0
+        robot.sayGomi(dayGomiMap.thursday)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 0 8 * 5 *"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      friday(robot)
+      if dayGomiMap.friday? && dayGomiMap.friday.length > 0
+        robot.sayGomi(dayGomiMap.friday)
   )
 
-  cronjob = new cronJob(
+  new cronJob(
     cronTime: "0 0 8 * 6 *"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      robot.send {room: "#general"}, "おはようございます！"
-      saturday(robot)
+      if dayGomiMap.saturday? && dayGomiMap.saturday.length > 0
+        robot.sayGomi(dayGomiMap.saturday)
   )
