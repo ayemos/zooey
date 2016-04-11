@@ -44,14 +44,24 @@ module.exports = (robot) ->
     robot.brain.set("userName-#{res.message.user.id}", null)
     res.reply "I'm sad.."
 
+  robot.respond /(.*)/i, (res) ->
+    res.reply "You're not smart enough. Sorry."
+
+
   cheers = ['頑張って…', '頑張って！！', 'ファイト！']
-  robot.hear /疲れた([^？\?]|\b|$)/i, (res) ->
-    res.send res.random cheers
-    # gif より picを多めに
-    if (Math.random() * 100) > 60
-      robot.showGif(res)
+  teases = ['そうね']
+  robot.hear /(疲れた|つかれた)([^？\?]|\b|$)/i, (res) ->
+    if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
+      res.send res.random cheers
+
+      # gif より picを多めに
+      if (Math.random() * 100) > 60
+        robot.showGif(res)
+      else
+        robot.showGif(res)
     else
-      robot.showGif(res)
+      res.send res.random teases
+
 
   #
   # robot.respond /open the (.*) doors/i, (res) ->
