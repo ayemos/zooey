@@ -9,7 +9,7 @@ module.exports = (robot) ->
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
-        robot.brain.set("userName-#{res.message.user.id}", name)
+        robot.brain.set("userNamo-#{res.message.user.id}", name)
       else
         res.reply res.message
         res.reply "I won't call that anybody but my dad. :p"
@@ -35,7 +35,7 @@ module.exports = (robot) ->
       res.reply "Hello, but who are you?"
 
       dialog.addChoice /(.*)\.?/i, (res2) ->
-        name = res2.match[1]
+        name = res2.message.rawText.match[1]
         robot.setName(res2, res2.match[1])
         return
 
