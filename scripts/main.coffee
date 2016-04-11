@@ -5,7 +5,7 @@ module.exports = (robot) ->
   conversation = new Conversation(robot)
 
   robot.setName = (res, name) ->
-    console.log res
+    console.log res, name
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
@@ -34,7 +34,8 @@ module.exports = (robot) ->
       dialog = conversation.startDialog(res)
       res.reply "Hello, but who are you?"
 
-      dialog.addChoice /(.*)/i, (res2) ->
+      dialog.addChoice /(.*)\.?/i, (res2) ->
+        name = res2.match[1]
         robot.setName(res2, res2.match[1])
         return
 
