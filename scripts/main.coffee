@@ -32,14 +32,15 @@ module.exports = (robot) ->
       res.reply "Hello, but who are you?"
 
       dialog.addChoice /(.*)/i, (res2) ->
+        res.send res2.message
         robot.setName(res2, res2.match[1])
         return
 
   robot.respond /call me (.*)\.?/i, (res) ->
     name = res.match[1]
-    setName(res, name)
+    robot.setName(res, name)
 
-  cheers = ['頑張って…', '頑張って！！', 'ファイト！', '']
+  cheers = ['頑張って…', '頑張って！！', 'ファイト！']
   robot.hear /疲れた([^？\?]|\b|$)/i, (res) ->
     res.send res.random cheers
     # gif より picを多めに
