@@ -50,7 +50,7 @@ module.exports = (robot) ->
 
   cheers = ['頑張って…', '頑張って！！', 'ファイト！']
   teases = ['そうね']
-  robot.hear /(疲れた|つかれた)([^？\?]|\b|$)/i, (res) ->
+  robot.hear /(眠い|ねむい|死にたい|疲れた|つかれた)([^？\?]|\b|$)/i, (res) ->
     if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
       res.send res.random cheers
 
