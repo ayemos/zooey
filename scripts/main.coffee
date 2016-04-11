@@ -6,15 +6,14 @@ module.exports = (robot) ->
 
   robot.setName = (res, name) ->
     console.log res, name
+    console.log robot.brain
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
         robot.brain.set("userNamo-#{res.message.user.id}", name)
       else
-        res.reply res.message
         res.reply "I won't call that anybody but my dad. :p"
     else
-      res.reply res.message
       res.reply "Aha, it's you #{name}"
       robot.brain.set("userName-#{res.message.user.id}", name)
 
@@ -34,8 +33,8 @@ module.exports = (robot) ->
       dialog = conversation.startDialog(res)
       res.reply "Hello, but who are you?"
 
-      dialog.addChoice /(.*)\.?/i, (res2) ->
-        name = res2.message.rawText
+      dialog.addChoice /(\w+)\.?$/i, (res2) ->
+        name = res2.match[1]
         robot.setName(res2, name)
         return
 
