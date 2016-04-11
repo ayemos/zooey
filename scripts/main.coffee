@@ -10,6 +10,7 @@ module.exports = (robot) ->
         res.reply "Daddy!!"
         robot.brain.set("userName-#{res.message.user.id}", name)
       else
+        res.reply res.message
         res.reply "I won't call that anybody but my dad. :p"
     else
       res.reply "Aha, it's you #{name}"
