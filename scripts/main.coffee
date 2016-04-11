@@ -40,6 +40,10 @@ module.exports = (robot) ->
     name = res.match[1]
     robot.setName(res, name)
 
+  robot.respond /forget me.\.?/i, (res) ->
+    robot.brain.set("userName-#{res.message.user.id}", null)
+    res.reply "I'm sad.."
+
   cheers = ['頑張って…', '頑張って！！', 'ファイト！']
   robot.hear /疲れた([^？\?]|\b|$)/i, (res) ->
     res.send res.random cheers
