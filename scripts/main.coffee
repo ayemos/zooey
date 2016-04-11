@@ -35,8 +35,8 @@ module.exports = (robot) ->
       res.reply "Hello, but who are you?"
 
       dialog.addChoice /(.*)\.?/i, (res2) ->
-        name = res2.message.rawText.match[1]
-        robot.setName(res2, res2.match[1])
+        name = res2.message.rawText
+        robot.setName(res2, name)
         return
 
   robot.respond /call me (.*)\.?/i, (res) ->
