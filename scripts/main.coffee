@@ -5,6 +5,7 @@ module.exports = (robot) ->
   conversation = new Conversation(robot)
 
   robot.setName = (res, name) ->
+    console.log res
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
@@ -13,6 +14,7 @@ module.exports = (robot) ->
         res.reply res.message
         res.reply "I won't call that anybody but my dad. :p"
     else
+      res.reply res.message
       res.reply "Aha, it's you #{name}"
       robot.brain.set("userName-#{res.message.user.id}", name)
 
