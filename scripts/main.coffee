@@ -10,7 +10,7 @@ module.exports = (robot) ->
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
-        robot.brain.set("userNamo-#{res.message.user.id}", name)
+        robot.brain.set("userName-#{res.message.user.id}", name)
       else
         res.reply "I won't call that anybody but my dad. :p"
     else
