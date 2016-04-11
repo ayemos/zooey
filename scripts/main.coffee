@@ -8,12 +8,12 @@ module.exports = (robot) ->
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
-        robot.brain.set("userName-#{res.message.user.id}", res.match[1])
+        robot.brain.set("userName-#{res.message.user.id}", name)
       else
         res.reply "I won't call that anybody but my dad. :p"
     else
       res.reply "Aha, it's you #{name}"
-      robot.brain.set("userName-#{res.message.user.id}", res.match[1])
+      robot.brain.set("userName-#{res.message.user.id}", name)
 
   robot.showPic = (res) ->
     imageMe res, 'zooey deschanel', (url) ->
@@ -32,7 +32,6 @@ module.exports = (robot) ->
       res.reply "Hello, but who are you?"
 
       dialog.addChoice /(.*)/i, (res2) ->
-        res.send res2.message
         robot.setName(res2, res2.match[1])
         return
 
@@ -40,7 +39,7 @@ module.exports = (robot) ->
     name = res.match[1]
     robot.setName(res, name)
 
-  robot.respond /forget me.\.?/i, (res) ->
+  robot.respond /forget me\.?/i, (res) ->
     robot.brain.set("userName-#{res.message.user.id}", null)
     res.reply "I'm sad.."
 
