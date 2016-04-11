@@ -16,7 +16,7 @@ module.exports = (robot) ->
       robot.brain.set("userName-#{res.message.user.id}", name)
 
   robot.showPic = (res) ->
-    imageMe res, 'zooey deschanel', (url) ->
+    imageMe res, 'zooey', (url) ->
       res.send url
 
   robot.showGif = (res) ->
