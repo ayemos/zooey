@@ -55,7 +55,7 @@ module.exports = (robot) ->
       res.send res.random cheers
 
       # gif より picを多めに
-      if (Math.random() * 100) > 60
+      if (Math.random() * 100) > 70
         robot.showGif(res)
       else
         robot.showGif(res)
