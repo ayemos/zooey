@@ -31,8 +31,8 @@ module.exports = (robot) ->
       dialog = conversation.startDialog(res)
       res.reply "Hello, but who are you?"
 
-      dialog.addChoice /.+?(\w+)\.?$/i, (res2) ->
-        name = res2.match[1]
+      dialog.addChoice /(.+\s)?(\w+)\.?$/i, (res2) ->
+        name = res2.match[2]
         robot.setName(res2, name)
         return
 
