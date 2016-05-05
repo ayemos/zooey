@@ -44,10 +44,6 @@ module.exports = (robot) ->
     robot.brain.set("userName-#{res.message.user.id}", null)
     res.reply "I'm sad.."
 
-  robot.respond /(.*)/i, (res) ->
-    res.reply "You're not smart enough. Sorry."
-
-
   cheers = ['頑張って…', '頑張って！！', 'ファイト！']
   teases = ['そうね']
   robot.hear /(眠い|ねむい|死にたい|疲れた|つかれた)([^？\?]|\b|$)/i, (res) ->
