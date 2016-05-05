@@ -44,7 +44,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 0"
+    cronTime: "0 45 7 * * 0"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -63,7 +63,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 1"
+    cronTime: "0 45 7 * * 1"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -90,7 +90,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 2"
+    cronTime: "0 45 7 * * 2"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -117,7 +117,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 3"
+    cronTime: "0 45 7 * * 3"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -136,7 +136,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 4"
+    cronTime: "0 45 7 * * 4"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -155,7 +155,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 5"
+    cronTime: "0 45 7 * * 5"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -174,7 +174,7 @@ module.exports = (robot) ->
   )
 
   new cronJob(
-    cronTime: "0 30 7 * * 6"
+    cronTime: "0 45 7 * * 6"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->

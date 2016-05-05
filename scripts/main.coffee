@@ -8,15 +8,15 @@ module.exports = (robot) ->
     if /daddy/i.test(name)
       if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
         res.reply "Daddy!!"
-        robot.brain.set("userName-#{res.message.user.id}", res.match[1])
+        robot.brain.set("userName-#{res.message.user.id}", name)
       else
         res.reply "I won't call that anybody but my dad. :p"
     else
       res.reply "Aha, it's you #{name}"
-      robot.brain.set("userName-#{res.message.user.id}", res.match[1])
+      robot.brain.set("userName-#{res.message.user.id}", name)
 
   robot.showPic = (res) ->
-    imageMe res, 'zooey deschanel', (url) ->
+    imageMe res, 'zooey', (url) ->
       res.send url
 
   robot.showGif = (res) ->
@@ -31,22 +31,37 @@ module.exports = (robot) ->
       dialog = conversation.startDialog(res)
       res.reply "Hello, but who are you?"
 
-      dialog.addChoice /(.*)/i, (res2) ->
-        robot.setName(res2, res2.match[1])
+      dialog.addChoice /(.+\s)?(\w+)\.?$/i, (res2) ->
+        name = res2.match[2]
+        robot.setName(res2, name)
         return
 
   robot.respond /call me (.*)\.?/i, (res) ->
     name = res.match[1]
-    setName(res, name)
+    robot.setName(res, name)
 
-  cheers = ['頑張って…', '頑張って！！', 'ファイト！', '']
-  robot.hear /疲れた([^？\?]|\b|$)/i, (res) ->
-    res.send res.random cheers
-    # gif より picを多めに
-    if (Math.random() * 100) > 60
-      robot.showGif(res)
+  robot.respond /forget me\.?/i, (res) ->
+    robot.brain.set("userName-#{res.message.user.id}", null)
+    res.reply "I'm sad.."
+
+  robot.respond /(.*)/i, (res) ->
+    res.reply "You're not smart enough. Sorry."
+
+
+  cheers = ['頑張って…', '頑張って！！', 'ファイト！']
+  teases = ['そうね']
+  robot.hear /(眠い|ねむい|死にたい|疲れた|つかれた)([^？\?]|\b|$)/i, (res) ->
+    if res.message.user.id == 'U0ZB2PMCP' #yuichiro-someya
+      res.send res.random cheers
+
+      # gif より picを多めに
+      if (Math.random() * 100) > 70
+        robot.showGif(res)
+      else
+        robot.showGif(res)
     else
-      robot.showGif(res)
+      res.send res.random teases
+
 
   #
   # robot.respond /open the (.*) doors/i, (res) ->
