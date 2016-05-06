@@ -10,14 +10,10 @@ dayGomiMap =
   "thursday": ["燃やすごみ"]
   "friday": ["古紙・ダンボールごみ"]
   "saturday": ["資源ごみ"]
-  "sunday": ["hoge"]
+  "sunday": []
 
 module.exports = (robot) ->
   robot.sayGomi = (gomiType) ->
-    robot.send {room: "#general"}, """
-!!!!試験運用中(結果を信用しないように)!!!!"
-----ゴミ出しのお知らせ----
-"""
     robot.send {room: "#general"}, """
 今日は『#{gomiType}』の日ね。
 "*8*時までに出すのよ？急いで急いで！
@@ -25,12 +21,7 @@ module.exports = (robot) ->
 
   robot.remindGomi = (gomiType) ->
     robot.send {room: "#general"}, """
-!!!!試験運用中(結果を信用しないように)!!!!"
-----ゴミ出しのお知らせ----
-"""
-    robot.send {room: "#general"}, """
 明日は『#{gomiType}』の日ね。
-"*8*時までに出すのよ？急いで急いで！
 """
 
   # Sunday
