@@ -29,10 +29,6 @@ module.exports = (robot) ->
         ids.push(url.substring(url.lastIndexOf('/') + 1, url.length))
         titles.push($(this).text().trim())
 
-      console.log(urls[0..2])
-      console.log(ids[0..2])
-      console.log(titles[0..2])
-
       latest_item = robot.brain.get("jmtyLatest-#{keyword}")
       robot.brain.set("jmtyLatest-#{keyword}", ids[0])
 
