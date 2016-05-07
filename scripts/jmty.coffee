@@ -8,6 +8,9 @@ search_prefix = "tokyo/sale"
 area_prefix = "area_portal"
 
 keywords = [
+  "無印",
+  "MUJI",
+  "テレビ",
   "IKEA",
   "チェア",
   "椅子",
