@@ -53,10 +53,11 @@ module.exports = (robot) ->
             break
 
         if latest_idx > 0
+          console.log("#{latest_idx+1} new items")
           robot.send {room: "#jmty"}, """
 ジモティーに新しい「#{name}」の商品が出品されたわよ！
 """
-          for i in [0..latest_idx]
+          for i in [0..latest_idx-1]
             robot.send {room: "#jmty"}, """
 #{titles[i]}
 #{urls[i]}
@@ -96,10 +97,11 @@ module.exports = (robot) ->
             break
 
         if latest_idx > 0
+          console.log("#{latest_idx+1} new items")
           robot.send {room: "#jmty"}, """
 ジモティーに新しい「#{keyword}」の商品が出品されたわよ！
 """
-          for i in [0..latest_idx]
+          for i in [0..latest_idx-1]
             robot.send {room: "#jmty"}, """
 #{titles[i]}
 #{urls[i]}
