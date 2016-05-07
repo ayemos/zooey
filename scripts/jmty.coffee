@@ -62,8 +62,10 @@ module.exports = (robot) ->
 #{titles[i]}
 #{urls[i]}
 """
+        else
+          console.log("No new items.")
       else
-        console.log("No new items.")
+        console.log("Initialized.")
 
   robot.jmtyKeywordSearch = (keyword) ->
     query_url = base_url + "/" + search_prefix
@@ -106,8 +108,10 @@ module.exports = (robot) ->
 #{titles[i]}
 #{urls[i]}
 """
+        else
+          console.log("No new items.")
       else
-        console.log("No new items.")
+        console.log("Initialized.")
 
   new cronJob(
     cronTime: "*/20 * * * * *"
