@@ -63,6 +63,9 @@ module.exports = (robot) ->
 #{titles[i]}
 #{urls[i]}
 """
+          robot.send {room: "#jmty"}, """
+以上よ！
+"""
         else
           console.log("No new items.")
       else
@@ -108,6 +111,9 @@ module.exports = (robot) ->
             robot.send {room: "#jmty"}, """
 #{titles[i]}
 #{urls[i]}
+"""
+          robot.send {room: "#jmty"}, """
+以上よ！
 """
         else
           console.log("No new items.")
