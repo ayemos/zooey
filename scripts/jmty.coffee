@@ -116,7 +116,8 @@ module.exports = (robot) ->
 """
 
           msg += """
-以上よ！
+
+ 以上よ！
 """
           robot.send {room: "#jmty"}, msg
         else
