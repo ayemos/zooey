@@ -3,8 +3,9 @@
 client = require('cheerio-httpcli');
 http = require('http')
 cronJob = require('cron').CronJob
-base_url = "http://jmty.jp/tokyo"
-search_prefix = "sale"
+base_url = "http://jmty.jp/"
+search_prefix = "tokyo/sale"
+area_prefix = "area_portal"
 
 keywords = [
   "IKEA",
@@ -15,10 +16,58 @@ keywords = [
   "骨董"
 ]
 
+area_map = {
+  "32717": "中目黒"
+}
+
 module.exports = (robot) ->
-  robot.jmty = (keyword) ->
-    query_url = base_url + "/" + search_prefix + "?keyword=" + keyword
+  robot.jmtyAreaSearch = (id, name) ->
+    query_url = base_url + area_prefix + "/" + id
+    console.log("Searching for #{name}")
+    console.log(query_url)
+
+    ids = []
+    urls = []
+    titles = []
+    client.fetch query_url, {}, (err, $, res, body) ->
+      if err?
+        console.log("Error: #{err}")
+      $('ul.list_sale > li > h3 > a').each (idx) ->
+        url = $(this).attr('href')
+        urls.push(url)
+        ids.push(url.substring(url.lastIndexOf('/') + 1, url.length))
+        titles.push($(this).text().trim())
+
+      latest_item = robot.brain.get("jmtyLatest-#{name}")
+      robot.brain.set("jmtyLatest-#{name}", ids[0])
+
+      console.log(ids[0..2])
+      console.log(urls[0..2])
+      console.log(titles[0..2])
+
+      if latest_item?
+        latest_idx = 0
+        for id, i in ids
+          if latest_item == id
+            latest_idx = i
+            break
+
+        if latest_idx > 0
+          robot.send {room: "#jmty"}, """
+ジモティーに新しい「#{name}」の商品が出品されたわよ！
+"""
+          for i in [0..latest_idx]
+            robot.send {room: "#jmty"}, """
+#{titles[i]}
+#{urls[i]}
+"""
+      else
+        console.log("No new items.")
+
+  robot.jmtyKeywordSearch = (keyword) ->
+    query_url = base_url + "/" + search_prefix
     console.log("Searching for #{keyword}")
+    console.log(query_url)
 
     ids = []
     urls = []
@@ -34,6 +83,10 @@ module.exports = (robot) ->
 
       latest_item = robot.brain.get("jmtyLatest-#{keyword}")
       robot.brain.set("jmtyLatest-#{keyword}", ids[0])
+
+      console.log(ids[0..2])
+      console.log(urls[0..2])
+      console.log(titles[0..2])
 
       if latest_item?
         latest_idx = 0
@@ -55,11 +108,14 @@ module.exports = (robot) ->
         console.log("No new items.")
 
   new cronJob(
-    cronTime: "0 */10 * * * *"
+    cronTime: "*/20 * * * * *"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
+      for id, name of area_map
+        robot.jmtyAreaSearch(id, name)
+
       for w in keywords
-        robot.jmty(w)
+        robot.jmtyKeywordSearch(w)
   )
 
