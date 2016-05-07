@@ -104,17 +104,21 @@ module.exports = (robot) ->
 
         if latest_idx > 0
           console.log("#{latest_idx+1} new items")
-          robot.send {room: "#jmty"}, """
+          msg = ""
+          msg += """
 ジモティーに新しい「#{keyword}」の商品が出品されたわよ！
 """
+
           for i in [0..latest_idx-1]
-            robot.send {room: "#jmty"}, """
+            msg += """
 #{titles[i]}
 #{urls[i]}
 """
-          robot.send {room: "#jmty"}, """
+
+          msg += """
 以上よ！
 """
+          robot.send {room: "#jmty"}, msg
         else
           console.log("No new items.")
       else
