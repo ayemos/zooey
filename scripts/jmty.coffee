@@ -125,8 +125,10 @@ module.exports = (robot) ->
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
+      ###
       for id, name of area_map
         robot.jmtyAreaSearch(id, name)
+      ###
 
       for w in keywords
         robot.jmtyKeywordSearch(w)
