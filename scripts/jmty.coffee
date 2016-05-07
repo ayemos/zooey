@@ -57,6 +57,7 @@ module.exports = (robot) ->
           robot.send {room: "#jmty"}, """
 ジモティーに新しい「#{name}」の商品が出品されたわよ！
 """
+
           for i in [0..latest_idx-1]
             robot.send {room: "#jmty"}, """
 #{titles[i]}
