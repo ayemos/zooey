@@ -18,6 +18,7 @@ keywords = [
 module.exports = (robot) ->
   robot.jmty = (keyword) ->
     query_url = base_url + "/" + search_prefix + "?keyword=" + keyword
+    console.log("Searching for #{keyword}")
 
     ids = []
     urls = []
@@ -48,6 +49,8 @@ module.exports = (robot) ->
 #{titles[i]}
 #{urls[i]}
 """
+      else
+        console.log("No new items.")
 
   new cronJob(
     cronTime: "0 */10 * * * *"
