@@ -24,6 +24,8 @@ module.exports = (robot) ->
     urls = []
     titles = []
     client.fetch query_url, { keyword: keyword }, (err, $, res, body) ->
+      if err?
+        console.log("Error: #{err}")
       $('ul.list_sale > li > h3 > a').each (idx) ->
         url = $(this).attr('href')
         urls.push(url)
