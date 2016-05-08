@@ -150,7 +150,6 @@ module.exports = (robot) ->
 """
           robot.send {room: "#jmty"}, msg
         else
-          robot.send {room: "#jmty"}, "何も無かった…"
           console.log("No new items.")
       else
         console.log("Initialized.")
