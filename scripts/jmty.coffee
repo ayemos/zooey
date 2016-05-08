@@ -121,7 +121,9 @@ module.exports = (robot) ->
           console.log("#{latest_idx+1} new items")
           msg = ""
           msg += """
-ジモティーに新しい「#{keyword}」の商品が出品されたわよ！
+
+新しい「#{keyword}」の商品が出品されたわよ！
+
 """
 
           for i in [0..latest_idx-1]
@@ -165,4 +167,11 @@ module.exports = (robot) ->
       for w in keywords
         robot.jmtyKeywordSearch(w)
   )
+
+  robot.respond /ジモティーチェック/i, (res) ->
+    res.reply "Roger."
+
+    for w in keywords
+      robot.jmtyKeywordSearch(w)
+
 
