@@ -16,7 +16,9 @@ keywords = [
   "椅子",
   "アンティーク",
   "ランプ",
-  "骨董"
+  "骨董",
+  "ビーズクッション",
+  "Yogibo"
 ]
 
 area_map = {
@@ -82,6 +84,7 @@ module.exports = (robot) ->
     ids = []
     urls = []
     titles = []
+    prices = []
     client.fetch query_url, { keyword: keyword }, (err, $, res, body) ->
       if err?
         console.log("Error: #{err}")
@@ -91,12 +94,16 @@ module.exports = (robot) ->
         ids.push(url.substring(url.lastIndexOf('/') + 1, url.length))
         titles.push($(this).text().trim())
 
+      $('ul.list_sale > li > p > b').each (idx) ->
+        prices.push($(this).text().trim())
+
       latest_item = robot.brain.get("jmtyLatest-#{keyword}")
       robot.brain.set("jmtyLatest-#{keyword}", ids[0])
 
       console.log(ids[0..2])
       console.log(urls[0..2])
       console.log(titles[0..2])
+      console.log(prices[0..2])
 
       if latest_item?
         latest_idx = 0
@@ -114,8 +121,10 @@ module.exports = (robot) ->
 
           for i in [0..latest_idx-1]
             msg += """
+
 #{titles[i]}
 #{urls[i]}
+
 """
 
           msg += """
