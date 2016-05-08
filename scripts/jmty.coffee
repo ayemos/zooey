@@ -94,8 +94,9 @@ module.exports = (robot) ->
         ids.push(url.substring(url.lastIndexOf('/') + 1, url.length))
         titles.push($(this).text().trim())
 
-      $('ul.list_sale > li > p > b').each (idx) ->
-        prices.push($(this).text().trim())
+      $('ul.list_sale > li > p > span > b').each (idx) ->
+        prices.push(parseInt(
+          $(this).text().trim().replace( /[円,]/g , '')))
 
       latest_item = robot.brain.get("jmtyLatest-#{keyword}")
       robot.brain.set("jmtyLatest-#{keyword}", ids[0])
@@ -120,12 +121,22 @@ module.exports = (robot) ->
 """
 
           for i in [0..latest_idx-1]
-            msg += """
+            if prices[i] == 0
+              msg += """
 
+**！！無料！！**
 #{titles[i]}
 #{urls[i]}
 
 """
+            else
+              msg += """
+
+【#{prices[i]}円】
+#{titles[i]}
+#{urls[i]}
+
+  """
 
           msg += """
 
@@ -138,7 +149,8 @@ module.exports = (robot) ->
         console.log("Initialized.")
 
   new cronJob(
-    cronTime: "0 */5 * * * *"
+    #    cronTime: "0 */5 * * * *"
+    cronTime: "*/5 * * * * *"
     start:    true
     timeZone: "Asia/Tokyo"
     onTick: ->
