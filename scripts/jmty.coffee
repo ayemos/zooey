@@ -10,7 +10,6 @@ area_prefix = "area_portal"
 keywords = [
   "無印",
   "MUJI",
-  "テレビ",
   "IKEA",
   "チェア",
   "椅子",
@@ -23,7 +22,11 @@ keywords = [
   "エレキベース",
   "アンプ",
   "中目黒",
-  "レトロ"
+  "レトロ",
+  "SENNHEISER",
+  "ゼンハイザー",
+  "ヘッドホン",
+  "MOMENTUM"
 ]
 
 area_map = {
